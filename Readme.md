@@ -15,39 +15,39 @@ Cashman is a simple API allowing to initialize and update atm state
 	
 ## Other
 	H2 console is available on http://localhost:8080/h2-console/	
-	JDBC URL: jdbc:h2:mem:device
+	JDBC URL: jdbc:h2:mem:contact
 
 ## API	
 
-### Devices Collection [/device]
+### contacts Collection [/contact]
 
-#### List All Devices [GET]
+#### List All contacts [GET]
 
 + Response 200 (application/json)
 
 		[
 			{
-			   "serialNumber":"my device",
-			   "banknotes":[
+			   "serialNumber":"my contact",
+			   "businessAddresses":[
 				  {
-					 "denomination":5.00,
+					 "address":5.00,
 					 "count":100,
 					 "id":5
 				  },
 				  {
-					 "denomination":100.00,
+					 "address":100.00,
 					 "count":100,
 					 "id":2
 				  }
 			   ],
-			   "coins":[
+			   "personalAddresses":[
 				  {
-					 "denomination":0.50,
+					 "address":0.50,
 					 "count":100,
 					 "id":7
 				  },
 				  {
-					 "denomination":0.10,
+					 "address":0.10,
 					 "count":100,
 					 "id":6
 				  }
@@ -55,29 +55,29 @@ Cashman is a simple API allowing to initialize and update atm state
 			}
 		]
 		
-#### Initialize a new device [POST]
+#### Initialize a new contact [POST]
 
 + Request (application/json)
 
 		{
 		   "serialNumber":"myNumber",
-		   "banknotes":[
+		   "businessAddresses":[
 			  {
-				 "denomination":5.00,
+				 "address":5.00,
 				 "count":100
 			  },
 			  {
-				 "denomination":100.00,
+				 "address":100.00,
 				 "count":100
 			  }
 		   ],
-		   "coins":[
+		   "personalAddresses":[
 			  {
-				 "denomination":0.50,
+				 "address":0.50,
 				 "count":100
 			  },
 			  {
-				 "denomination":0.10,
+				 "address":0.10,
 				 "count":100
 			  }
 		   ]
@@ -94,28 +94,28 @@ Cashman is a simple API allowing to initialize and update atm state
 			{
 				"id": 103,
 				"serialNumber": "myNumber",
-				"banknotes":
+				"businessAddresses":
 				[
 					{
-						"denomination": 5,
+						"address": 5,
 						"count": 100,
 						"id": 20
 					},
 					{
-						"denomination": 100,
+						"address": 100,
 						"count": 100,
 						"id": 21
 					}
 				],
-				"coins":
+				"personalAddresses":
 				[
 					{
-						"denomination": 0.5,
+						"address": 0.5,
 						"count": 100,
 						"id": 22
 					},
 					{
-						"denomination": 0.1,
+						"address": 0.1,
 						"count": 100,
 						"id": 23
 					}
@@ -125,7 +125,7 @@ Cashman is a simple API allowing to initialize and update atm state
 				]
 			}
 
-### Device [/device/{id}]
+### contact [/contact/{id}]
 
 #### Find by id [GET]
 
@@ -140,28 +140,28 @@ Cashman is a simple API allowing to initialize and update atm state
 			{
 				"id": 103,
 				"serialNumber": "myNumber",
-				"banknotes":
+				"businessAddresses":
 				[
 					{
-						"denomination": 5,
+						"address": 5,
 						"count": 100,
 						"id": 20
 					},
 					{
-						"denomination": 100,
+						"address": 100,
 						"count": 100,
 						"id": 21
 					}
 				],
-				"coins":
+				"personalAddresses":
 				[
 					{
-						"denomination": 0.5,
+						"address": 0.5,
 						"count": 100,
 						"id": 22
 					},
 					{
-						"denomination": 0.1,
+						"address": 0.1,
 						"count": 100,
 						"id": 23
 					}
@@ -171,7 +171,7 @@ Cashman is a simple API allowing to initialize and update atm state
 				]
 			}
 	
-### Device [/withdraw/{id}/{withdrawAmount}]
+### contact [/withdraw/{id}/{withdrawAmount}]
 
 #### Withdraw from atm [PUT]	
 
@@ -184,28 +184,28 @@ Cashman is a simple API allowing to initialize and update atm state
 			{
 				"id": 103,
 				"serialNumber": "myNumber",
-				"banknotes":
+				"businessAddresses":
 				[
 					{
-						"denomination": 5,
+						"address": 5,
 						"count": 100,
 						"id": 20
 					},
 					{
-						"denomination": 100,
+						"address": 100,
 						"count": 100,
 						"id": 21
 					}
 				],
-				"coins":
+				"personalAddresses":
 				[
 					{
-						"denomination": 0.5,
+						"address": 0.5,
 						"count": 100,
 						"id": 22
 					},
 					{
-						"denomination": 0.1,
+						"address": 0.1,
 						"count": 100,
 						"id": 23
 					}
@@ -215,7 +215,7 @@ Cashman is a simple API allowing to initialize and update atm state
 				]
 			}
 	
-### Device [/addTo/{id}]
+### contact [/addTo/{id}]
 
 #### Add to atm [PUT]	
 
@@ -223,23 +223,23 @@ Cashman is a simple API allowing to initialize and update atm state
 
 		{
 		   "serialNumber":"myNumber",
-		   "banknotes":[
+		   "businessAddresses":[
 			  {
-				 "denomination":5.00,
+				 "address":5.00,
 				 "count":100
 			  },
 			  {
-				 "denomination":100.00,
+				 "address":100.00,
 				 "count":100
 			  }
 		   ],
-		   "coins":[
+		   "personalAddresses":[
 			  {
-				 "denomination":0.50,
+				 "address":0.50,
 				 "count":100
 			  },
 			  {
-				 "denomination":0.10,
+				 "address":0.10,
 				 "count":100
 			  }
 		   ]
@@ -252,28 +252,28 @@ Cashman is a simple API allowing to initialize and update atm state
 		{
 			"id": 103,
 			"serialNumber": "myNumber",
-			"banknotes":
+			"businessAddresses":
 			[
 				{
-					"denomination": 5,
+					"address": 5,
 					"count": 200,
 					"id": 20
 				},
 				{
-					"denomination": 100,
+					"address": 100,
 					"count": 200,
 					"id": 21
 				}
 			],
-			"coins":
+			"personalAddresses":
 			[
 				{
-					"denomination": 0.5,
+					"address": 0.5,
 					"count": 200,
 					"id": 22
 				},
 				{
-					"denomination": 0.1,
+					"address": 0.1,
 					"count": 200,
 					"id": 23
 				}

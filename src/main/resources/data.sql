@@ -1,0 +1,6 @@
+insert into Person (id, title, first_name, last_name, gender, person_type) values(1, 0, 'Edward', 'Hyde', 'Male', 'Business')
+insert into Person (id, title, first_name, last_name, gender, person_type) values(2, 3, 'Henry', 'Jekyll', 'Male', 'Personal')
+insert into Address(id, person_id, street, city, state, postcode) values (1, 1, '6 Dark street', 'Evilburg', 'Evilstate', 6666)
+insert into Address(id, person_id, street, city, state, postcode) values (2, 2, '9 Bright street', 'Goodville', 'Goodstate', 9999)
+insert into Contact(id, person_id, type, value) values(1, 1, 0, '6666')
+insert into Contact(id, person_id, type, value) values(2, 2, 1, '9999')

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:ng="http://angularjs.org" id="ng-app" ng-app="addressBook">
+	<head>
+		<meta charset="utf-8"/>
+		<title>Address Book (Metawidget AngularJS Example)</title>
+		<link rel="stylesheet" type="text/css" href="css/addressbook.css" media="all"/>
+		<link rel="stylesheet" type="text/css" href="css/framework-specific-addressbook.css" media="all"/>
+ 		<!--[if lte IE 8]>
+		<script>
+			document.createElement( 'metawidget' );
+		</script>
+		<![endif]-->		
+	</head>
+	<body>
+	
+		<div id="content" ng-controller="addressBookController">
+	
+			<metawidget ng-model="search" config="metawidgetConfig.search">
+				<facet name="footer">
+					<metawidget ng-model="searchActions" config="metawidgetConfig.buttons"></metawidget>
+				</facet>
+			</metawidget>
+	
+			<table class="data-table">
+				<thead>
+					<tr>
+						<th class="column-half">Name</th>
+						<th class="column-half">Contact</th>
+					</tr>
+				</thead>
+				<tbody>
+	
+					<tr ng-repeat="person in persons | filter:filter | orderBy:'firstname'">
+						<td class="column-half">
+							<a href="#/contact/{{contact.id}}">
+								{{contact.title}} {{contact.firstName}} {{contact.lastName}}
+							</a>
+						</td>
+						<td class="column-half">
+							<span ng-repeat="contact in person.contact">
+								{{contact.type}}: {{contact.value}}
+							</span>
+						</td>
+					</tr>
+	
+				</tbody>
+			</table>
+	
+		</div>
+	
+		<div ng-view></div>
+
+		<script src="lib/angular/angular.min.js" type="text/javascript"></script>
+		<script src="lib/angular/angular-route.min.js" type="text/javascript"></script>
+		<script src="lib/metawidget/core/metawidget-core.min.js" type="text/javascript"></script>
+		<script src="lib/metawidget/angular/metawidget-angular.min.js" type="text/javascript"></script>
+		<script src="js/app.js" type="text/javascript"></script>
+		<script src="js/controllers.js" type="text/javascript"></script>
+		<script src="js/services.js" type="text/javascript"></script>
+	</body>
+</html>
