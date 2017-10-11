@@ -1,5 +1,6 @@
 package com.example.addressbook.service;
 
+import com.example.addressbook.domain.Person;
 import com.example.addressbook.dto.PersonDTO;
 
 public interface AddressBookService {
@@ -19,6 +20,8 @@ public interface AddressBookService {
 
     void setPersonSchema(String json);
 
+    void delete(Person person);
+
     String getPersonSchema();
 
     void setBusinessSchema(String json);
@@ -28,4 +31,6 @@ public interface AddressBookService {
     void setAddressSchema(String json);
 
     String getAddressSchema();
+
+    Person save(Person person);
 }

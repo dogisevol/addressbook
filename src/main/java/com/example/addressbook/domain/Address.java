@@ -1,6 +1,7 @@
 package com.example.addressbook.domain;
 
 import org.hibernate.annotations.Cascade;
+import org.metawidget.inspector.annotation.UiComesAfter;
 import org.metawidget.inspector.annotation.UiHidden;
 import org.metawidget.inspector.annotation.UiRequired;
 
@@ -25,20 +26,24 @@ public class Address implements Serializable {
 
     @UiRequired
     @Column(nullable = false)
+    @UiComesAfter(value = "street")
     private String city;
 
     @UiRequired
     @Column(nullable = false)
+    @UiComesAfter(value = "city")
     private String state;
 
     @UiRequired
     @Column(nullable = false)
+    @UiComesAfter(value = "state")
     private String postcode;
 
     @OneToOne
     @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
     @JoinColumn(name = "person_id")
     private Person person;
+
     @UiHidden
     public Long getId() {
         return id;
@@ -80,6 +85,7 @@ public class Address implements Serializable {
         this.street = street;
     }
 
+    @UiHidden
     public Person getPerson() {
         return person;
     }

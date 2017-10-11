@@ -1,5 +1,7 @@
 package com.example.addressbook.controller;
 
+import com.example.addressbook.domain.Person;
+import com.example.addressbook.dto.ContactDTO;
 import com.example.addressbook.dto.PersonDTO;
 import com.example.addressbook.service.AddressBookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @Controller
 public class AddressBookController {
@@ -52,24 +56,32 @@ public class AddressBookController {
     }
 
 
-//    @RequestMapping(value = "/contact", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-//    @ResponseBody
-//    @Transactional
-//    public ResponseEntity<ContactDTO> initATM(@RequestBody ContactDTO body, UriComponentsBuilder b) {
-//        ContactDTO contactDTO = addressBookService.initializeATM(body);
-//        UriComponents uriComponents =
-//                b.path("/contact/{id}").buildAndExpand(contactDTO.getId());
-//        return ResponseEntity.created(uriComponents.toUri()).body(contactDTO);
-//    }
-
-    @RequestMapping(value = "/contact/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/contact", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @Transactional
-    public ResponseEntity<PersonDTO> findATM(@PathVariable Long id) {
-        PersonDTO personDTO = addressBookService.fetchByID(id);
-        if (personDTO != null)
-            return ResponseEntity.ok(personDTO);
-        else
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<PersonDTO> create(@RequestBody PersonDTO body, UriComponentsBuilder b) {
+        PersonDTO result = new PersonDTO(addressBookService.save(body.toEntity()));
+        UriComponents uriComponents =
+                b.path("/contact/{id}").buildAndExpand(result.getId());
+        return ResponseEntity.created(uriComponents.toUri()).body(result);
+    }
+
+
+    @RequestMapping(value = "/contact", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @Transactional
+    public ResponseEntity<PersonDTO> update(@RequestBody PersonDTO body, UriComponentsBuilder b) {
+        PersonDTO result = new PersonDTO(addressBookService.save(body.toEntity()));
+        UriComponents uriComponents =
+                b.path("/contact/{id}").buildAndExpand(result.getId());
+        return ResponseEntity.created(uriComponents.toUri()).body(result);
+    }
+
+    @RequestMapping(value = "/contact", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @Transactional
+    public ResponseEntity<PersonDTO> delete(@RequestBody PersonDTO body) {
+        addressBookService.delete(body.toEntity());
+            return ResponseEntity.ok().build();
     }
 }

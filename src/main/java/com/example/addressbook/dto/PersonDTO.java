@@ -3,6 +3,7 @@ package com.example.addressbook.dto;
 
 import com.example.addressbook.domain.*;
 import com.example.addressbook.domain.ref.Gender;
+import com.example.addressbook.domain.ref.PersonType;
 import com.example.addressbook.domain.ref.Title;
 
 import java.util.ArrayList;
@@ -38,11 +39,24 @@ public class PersonDTO implements Comparable<PersonDTO> {
                 this.communications.add(new ContactDTO(communication));
             }
         this.type = person.getType().name();
+        if(person instanceof PersonalContact){
+            this.dob = ((PersonalContact)person).getDob();
+        }else{
+
+        }
     }
 
     public Person toEntity() {
-        Person person = new BusinessContact();
+        Person person;
+        if(PersonType.Business.name().equalsIgnoreCase(this.type)){
+            person = new BusinessContact();
+        }else{
+            person = new PersonalContact();
+            ((PersonalContact)person).setDob(this.getDob());
+        }
+
         person.setAddress(this.getAddress().toEntity());
+        person.getAddress().setPerson(person);
         person.setFirstName(this.getFirstName());
         person.setLastName(this.getLastName());
         person.setGender(Gender.valueOf(this.getGender()));
@@ -53,6 +67,7 @@ public class PersonDTO implements Comparable<PersonDTO> {
             Communication communication = contactDTO.toEntity();
             communication.setPerson(person);
             person.getCommunications().add(communication);
+            communication.setPerson(person);
         }
         return person;
     }

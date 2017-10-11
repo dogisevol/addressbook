@@ -8,10 +8,10 @@
 
 		<div id="dialog-content">
 
+			<img id="dialog-image" ng-src="media/{{current.type}}.gif" alt=""/>
 
-			<metawidget ng-model="current" config="metawidgetConfig.form">
-				<metawidget ng-model="current.address" config="metawidgetConfig.address">
-				<table id="currentcontacts" class="data-table">
+			<metawidget ng-model="current" read-only="readOnly" config="metawidgetConfig.form">
+				<table id="currentCommunications" class="data-table">
 					<thead>
 						<tr>
 							<th class="column-half">Type</th>

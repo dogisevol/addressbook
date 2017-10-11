@@ -4,6 +4,7 @@ import com.example.addressbook.domain.ref.Gender;
 import com.example.addressbook.domain.ref.PersonType;
 import com.example.addressbook.domain.ref.Title;
 import org.hibernate.annotations.GenerationTime;
+import org.metawidget.inspector.annotation.UiComesAfter;
 import org.metawidget.inspector.annotation.UiHidden;
 import org.metawidget.inspector.annotation.UiLarge;
 import org.metawidget.inspector.annotation.UiRequired;
@@ -20,31 +21,36 @@ public abstract class Person {
     @Id
     @SequenceGenerator(name = "Person_generator", sequenceName = "Person_sequence", initialValue = 100)
     @GeneratedValue(generator = "Person_generator")
+    @UiHidden
     private Long id;
 
     @Column(name = "creation_date", insertable = false, updatable = false, columnDefinition = "timestamp default current_timestamp")
     @org.hibernate.annotations.Generated(value = GenerationTime.INSERT)
+    @UiHidden
     private ZonedDateTime creationDate;
 
     @UiRequired
     private String firstName;
 
     @UiRequired
+    @UiComesAfter(value = "firstName")
     private String lastName;
     @Enumerated(EnumType.STRING)
     private Title title;
 
     @UiRequired
     @Enumerated(EnumType.STRING)
+    @UiComesAfter(value = "lastName")
     private Gender gender;
 
-    @UiRequired
+    @UiHidden
     @OneToOne(mappedBy = "person")
     private Address address;
 
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    @UiHidden
     private Set<Communication> communications;
-
+    @UiComesAfter(value = "gender")
     private String notes;
 
 
@@ -97,6 +103,7 @@ public abstract class Person {
         this.gender = gender;
     }
 
+    @UiHidden
     public Set<Communication> getCommunications() {
         return communications;
     }
@@ -105,6 +112,7 @@ public abstract class Person {
         this.communications = communications;
     }
 
+    @UiHidden
     public Address getAddress() {
         return address;
     }

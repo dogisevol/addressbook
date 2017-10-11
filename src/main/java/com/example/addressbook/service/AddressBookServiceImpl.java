@@ -73,6 +73,16 @@ public class AddressBookServiceImpl implements AddressBookService {
         return this.addressSchema;
     }
 
+    @Override
+    public Person save(Person person) {
+        return this.personRepository.save(person);
+    }
+
+    @Override
+    public void delete(Person person) {
+        this.personRepository.delete(person);
+    }
+
 //    public static String[] getNames(Class<? extends Enum<?>> e) {
 //        return Arrays.stream(e.getEnumConstants()).map(Enum::name).toArray(String[]::new);
 //    }

@@ -8,8 +8,8 @@ import com.example.addressbook.domain.ref.PersonType;
 import com.example.addressbook.service.AddressBookService;
 import org.metawidget.inspectionresultprocessor.iface.DomInspectionResultProcessor;
 import org.metawidget.inspectionresultprocessor.json.JsonTypeMappingProcessor;
-import org.metawidget.inspectionresultprocessor.json.schema.JsonSchemaMappingProcessor;
-import org.metawidget.inspectionresultprocessor.sort.ComesAfterInspectionResultProcessor;
+import org.metawidget.inspectionresultprocessor.json.JsonTypeMappingProcessorConfig;
+import org.metawidget.inspectionresultprocessor.type.TypeMappingInspectionResultProcessor;
 import org.metawidget.inspector.annotation.MetawidgetAnnotationInspector;
 import org.metawidget.inspector.composite.CompositeInspector;
 import org.metawidget.inspector.composite.CompositeInspectorConfig;
@@ -40,17 +40,17 @@ public class AddessBookApp {
                     new PropertyTypeInspector()
             ));
 
-            DomInspectionResultProcessor[] mInspectionResultProcessors = new DomInspectionResultProcessor[]{
-                    new ComesAfterInspectionResultProcessor<Object>(),
+            DomInspectionResultProcessor[] processors = new DomInspectionResultProcessor[]{
+                    new JsonTypeMappingProcessor(),
+                    new TypeMappingInspectionResultProcessor(new JsonTypeMappingProcessorConfig()),
+                    new JsonSchemaWithHiddenProcessor()
             };
 
-            //Prepare businessContact
-
-            addressBookService.setPersonSchema(getJson(PersonalContact.class.getName(), mInspector, mInspectionResultProcessors));
-            addressBookService.setBusinessSchema(getJson(BusinessContact.class.getName(), mInspector, mInspectionResultProcessors));
-            addressBookService.setAddressSchema(getJson(Address.class.getName(), mInspector, mInspectionResultProcessors));
-            addressBookService.setPersonTypeSchema(getJson(PersonType.class.getName(), mInspector, mInspectionResultProcessors));
-            addressBookService.setCommunicationTypeSchema(getJson(CommunicationType.class.getName(), mInspector, mInspectionResultProcessors));
+            addressBookService.setPersonSchema(getJson(PersonalContact.class.getName(), mInspector, processors));
+            addressBookService.setBusinessSchema(getJson(BusinessContact.class.getName(), mInspector, processors));
+            addressBookService.setAddressSchema(getJson(Address.class.getName(), mInspector, processors));
+            addressBookService.setPersonTypeSchema(getJson(PersonType.class.getName(), mInspector, processors));
+            addressBookService.setCommunicationTypeSchema(getJson(CommunicationType.class.getName(), mInspector, processors));
         };
     }
 

@@ -28,15 +28,23 @@
 				} ],
 				layout: _tableLayout
 			},
+			address: {
+				inspectionResultProcessors: [ function( inspectionResult, mw, toInspect, type, names ) {
+				 if ( type === 'current' && names.length === 1 && names[0] === 'address' ) {
+                    $http.get('schema/address' ).then( function( result ) {
+                        metawidget.util.combineInspectionResults( inspectionResult,  result.data);
+                        mw.buildWidgets( inspectionResult );
+                    });
+                 }
+                } ],
+                    layout: _tableLayout
+			},
 			form: {
 				inspectionResultProcessors: [ function( inspectionResult, mw, toInspect, type, names ) {
 					if ( names === undefined && toInspect !== undefined && toInspect.type !== undefined ) {
 						$http.get('schema/' + toInspect.type.toLowerCase() ).then( function( result ) {
 							metawidget.util.combineInspectionResults( inspectionResult, result.data );
-							$http.get('schema/address' ).then( function( result ) {
-							    metawidget.util.combineInspectionResults( inspectionResult, result.data );
-                                mw.buildWidgets( inspectionResult );
-							});
+                            mw.buildWidgets( inspectionResult );
 						} );
 					} else {
 						return inspectionResult;
@@ -67,7 +75,7 @@
 			simple: {
                 inspectionResultProcessors: [ function( inspectionResult, mw, toInspect, type, names ) {
                     if ( type === 'communication' && names.length === 1 && names[0] === 'type' ) {
-                        $http.get('schema/contactType' + toInspect.type ).then( function( result ) {
+                        $http.get('schema/communicationType' + toInspect.type ).then( function( result ) {
                             metawidget.util.combineInspectionResults( inspectionResult, result.data );
                             mw.buildWidgets( inspectionResult );
                         } );
