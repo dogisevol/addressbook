@@ -1,6 +1,6 @@
-package com.example.addressbook.service.web;
+package com.example.addressbook.controller;
 
-import com.example.addressbook.repository.dto.PersonDTO;
+import com.example.addressbook.dto.PersonDTO;
 import com.example.addressbook.service.AddressBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

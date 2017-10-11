@@ -1,4 +1,4 @@
-package com.example.addressbook.repository.dto;
+package com.example.addressbook.dto;
 
 
 import com.example.addressbook.domain.*;
@@ -18,8 +18,8 @@ public class PersonDTO implements Comparable<PersonDTO> {
     private String lastName;
     private Date dob;
     private String gender;
-    private String personType;
-    private Collection<ContactDTO> contacts = new ArrayList<>();
+    private String type;
+    private Collection<ContactDTO> communications = new ArrayList<>();
 
     public PersonDTO() {
 
@@ -35,8 +35,9 @@ public class PersonDTO implements Comparable<PersonDTO> {
         this.title = person.getTitle().name();
         if(person.getCommunications() != null && person.getCommunications().size() > 0)
             for (Communication communication : person.getCommunications()) {
-                this.contacts.add(new ContactDTO(communication));
+                this.communications.add(new ContactDTO(communication));
             }
+        this.type = person.getType().name();
     }
 
     public Person toEntity() {
@@ -48,7 +49,7 @@ public class PersonDTO implements Comparable<PersonDTO> {
         person.setId(this.getId());
         person.setTitle(Title.valueOf(this.getTitle()));
         person.setCommunications(new HashSet<>());
-        for (ContactDTO contactDTO :this.getContacts()) {
+        for (ContactDTO contactDTO :this.getCommunications()) {
             Communication communication = contactDTO.toEntity();
             communication.setPerson(person);
             person.getCommunications().add(communication);
@@ -74,20 +75,20 @@ public class PersonDTO implements Comparable<PersonDTO> {
 //        else return this.getaddress().compareTo(o.getaddress());
     }
 
-    public Collection<ContactDTO> getContacts() {
-        return contacts;
+    public Collection<ContactDTO> getCommunications() {
+        return communications;
     }
 
-    public void setContacts(Collection<ContactDTO> contacts) {
-        this.contacts = contacts;
+    public void setCommunications(Collection<ContactDTO> communications) {
+        this.communications = communications;
     }
 
-    public String getPersonType() {
-        return personType;
+    public String getType() {
+        return type;
     }
 
-    public void setPersonType(String personType) {
-        this.personType = personType;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getGender() {

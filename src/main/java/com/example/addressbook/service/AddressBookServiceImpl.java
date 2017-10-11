@@ -3,7 +3,7 @@ package com.example.addressbook.service;
 import com.example.addressbook.domain.Person;
 import com.example.addressbook.repository.AddressRepository;
 import com.example.addressbook.repository.PersonRepository;
-import com.example.addressbook.repository.dto.PersonDTO;
+import com.example.addressbook.dto.PersonDTO;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

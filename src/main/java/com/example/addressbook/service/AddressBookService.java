@@ -1,6 +1,6 @@
 package com.example.addressbook.service;
 
-import com.example.addressbook.repository.dto.PersonDTO;
+import com.example.addressbook.dto.PersonDTO;
 
 public interface AddressBookService {
 

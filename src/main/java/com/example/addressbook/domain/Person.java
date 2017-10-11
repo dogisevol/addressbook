@@ -5,6 +5,7 @@ import com.example.addressbook.domain.ref.PersonType;
 import com.example.addressbook.domain.ref.Title;
 import org.hibernate.annotations.GenerationTime;
 import org.metawidget.inspector.annotation.UiHidden;
+import org.metawidget.inspector.annotation.UiLarge;
 import org.metawidget.inspector.annotation.UiRequired;
 
 import javax.persistence.*;
@@ -19,7 +20,6 @@ public abstract class Person {
     @Id
     @SequenceGenerator(name = "Person_generator", sequenceName = "Person_sequence", initialValue = 100)
     @GeneratedValue(generator = "Person_generator")
-    @UiHidden
     private Long id;
 
     @Column(name = "creation_date", insertable = false, updatable = false, columnDefinition = "timestamp default current_timestamp")
@@ -56,6 +56,7 @@ public abstract class Person {
         this.creationDate = creationDate;
     }
 
+    @UiHidden
     public Long getId() {
         return id;
     }
@@ -112,6 +113,7 @@ public abstract class Person {
         this.address = address;
     }
 
+    @UiLarge
     public String getNotes() {
         return notes;
     }

@@ -32,7 +32,7 @@
 				</thead>
 				<tbody>
 	
-					<tr ng-repeat="contact in contacts | filter:filter | orderBy:'firstName'">
+					<tr ng-repeat="contact in contacts | filter:filter | orderBy:'lastName'">
 						<td class="column-half">
 							<a href="#/contact/{{contact.id}}">
 								{{contact.title}} {{contact.firstName}} {{contact.lastName}}

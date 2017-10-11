@@ -1,6 +1,7 @@
 package com.example.addressbook.domain;
 
 import org.hibernate.annotations.Cascade;
+import org.metawidget.inspector.annotation.UiHidden;
 import org.metawidget.inspector.annotation.UiRequired;
 
 import javax.persistence.*;
@@ -14,7 +15,9 @@ public class Address implements Serializable {
     @Id
     @SequenceGenerator(name = "address_generator", sequenceName = "address_generator")
     @GeneratedValue(generator = "address_generator")
+    @UiHidden
     private Long id;
+
 
     @UiRequired
     @Column(nullable = false)
@@ -36,7 +39,7 @@ public class Address implements Serializable {
     @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
     @JoinColumn(name = "person_id")
     private Person person;
-
+    @UiHidden
     public Long getId() {
         return id;
     }

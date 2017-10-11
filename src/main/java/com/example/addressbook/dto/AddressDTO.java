@@ -1,4 +1,4 @@
-package com.example.addressbook.repository.dto;
+package com.example.addressbook.dto;
 
 
 import com.example.addressbook.domain.Address;

@@ -36,14 +36,12 @@ public class AddessBookApp {
     InitializingBean init() {
         return () -> {
             CompositeInspector mInspector = new CompositeInspector(new CompositeInspectorConfig().setInspectors(
-                    new PropertyTypeInspector(),
-                    new MetawidgetAnnotationInspector()
+                    new MetawidgetAnnotationInspector(),
+                    new PropertyTypeInspector()
             ));
 
             DomInspectionResultProcessor[] mInspectionResultProcessors = new DomInspectionResultProcessor[]{
                     new ComesAfterInspectionResultProcessor<Object>(),
-                    new JsonSchemaMappingProcessor<Object>(),
-                    new JsonTypeMappingProcessor<Object>()
             };
 
             //Prepare businessContact

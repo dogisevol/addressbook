@@ -31,7 +31,7 @@
 			form: {
 				inspectionResultProcessors: [ function( inspectionResult, mw, toInspect, type, names ) {
 					if ( names === undefined && toInspect !== undefined && toInspect.type !== undefined ) {
-						$http.get('schema/' + toInspect.type ).then( function( result ) {
+						$http.get('schema/' + toInspect.type.toLowerCase() ).then( function( result ) {
 							metawidget.util.combineInspectionResults( inspectionResult, result.data );
 							$http.get('schema/address' ).then( function( result ) {
 							    metawidget.util.combineInspectionResults( inspectionResult, result.data );
