@@ -1,26 +1,29 @@
 package com.example.addressbook.domain;
 
+import com.example.addressbook.domain.ref.CommunicationType;
 import org.hibernate.annotations.Cascade;
+import org.metawidget.inspector.annotation.UiRequired;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class Contact implements Serializable {
+public class Communication implements Serializable {
 
     @Id
-    @SequenceGenerator(name = "contact_generator", sequenceName = "contact_generator")
-    @GeneratedValue(generator = "contact_generator")
+    @SequenceGenerator(name = "Communication_generator", sequenceName = "Communication_generator")
+    @GeneratedValue(generator = "Communication_generator")
     private Long id;
 
-    @Column(nullable = false)
+    @UiRequired
     @Enumerated(EnumType.STRING)
-    private ContactType type;
+    private CommunicationType communicationType;
     @ManyToOne
     @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
     @JoinColumn(name = "person_id")
     private Person person;
 
+    @UiRequired
     @Column(nullable = false)
     private String value;
 
@@ -32,12 +35,12 @@ public class Contact implements Serializable {
         this.value = value;
     }
 
-    public ContactType getType() {
-        return type;
+    public CommunicationType getCommunicationType() {
+        return communicationType;
     }
 
-    public void setType(ContactType type) {
-        this.type = type;
+    public void setCommunicationType(CommunicationType communicationType) {
+        this.communicationType = communicationType;
     }
 
     public Long getId() {

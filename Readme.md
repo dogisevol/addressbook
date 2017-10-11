@@ -15,19 +15,19 @@ Cashman is a simple API allowing to initialize and update atm state
 	
 ## Other
 	H2 console is available on http://localhost:8080/h2-console/	
-	JDBC URL: jdbc:h2:mem:contact
+	JDBC URL: jdbc:h2:mem:communication
 
 ## API	
 
-### contacts Collection [/contact]
+### communications Collection [/communication]
 
-#### List All contacts [GET]
+#### List All communications [GET]
 
 + Response 200 (application/json)
 
 		[
 			{
-			   "serialNumber":"my contact",
+			   "serialNumber":"my communication",
 			   "businessAddresses":[
 				  {
 					 "address":5.00,
@@ -55,7 +55,7 @@ Cashman is a simple API allowing to initialize and update atm state
 			}
 		]
 		
-#### Initialize a new contact [POST]
+#### Initialize a new communication [POST]
 
 + Request (application/json)
 
@@ -125,7 +125,7 @@ Cashman is a simple API allowing to initialize and update atm state
 				]
 			}
 
-### contact [/contact/{id}]
+### communication [/communication/{id}]
 
 #### Find by id [GET]
 
@@ -171,7 +171,7 @@ Cashman is a simple API allowing to initialize and update atm state
 				]
 			}
 	
-### contact [/withdraw/{id}/{withdrawAmount}]
+### communication [/withdraw/{id}/{withdrawAmount}]
 
 #### Withdraw from atm [PUT]	
 
@@ -215,7 +215,7 @@ Cashman is a simple API allowing to initialize and update atm state
 				]
 			}
 	
-### contact [/addTo/{id}]
+### communication [/addTo/{id}]
 
 #### Add to atm [PUT]	
 

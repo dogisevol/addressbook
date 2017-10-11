@@ -1,9 +1,6 @@
 package com.example.addressbook.service;
 
-import com.example.addressbook.repository.dto.ContactDTO;
 import com.example.addressbook.repository.dto.PersonDTO;
-
-import java.util.Map;
 
 public interface AddressBookService {
 
@@ -11,6 +8,24 @@ public interface AddressBookService {
 
     PersonDTO fetchByID(Long id);
 
-    Map<Object, Object> getBusinessSchema();
-    Map<Object, Object> getPersonalSchema();
+
+    String getPersonTypeSchema();
+
+    void setPersonTypeSchema(String json);
+
+    String getCommunicationTypeSchema();
+
+    void setCommunicationTypeSchema(String json);
+
+    void setPersonSchema(String json);
+
+    String getPersonSchema();
+
+    void setBusinessSchema(String json);
+
+    String getBusinessSchema();
+
+    void setAddressSchema(String json);
+
+    String getAddressSchema();
 }

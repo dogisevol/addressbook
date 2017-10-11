@@ -1,39 +1,51 @@
 package com.example.addressbook.domain;
 
+import com.example.addressbook.domain.ref.Gender;
+import com.example.addressbook.domain.ref.PersonType;
+import com.example.addressbook.domain.ref.Title;
 import org.hibernate.annotations.GenerationTime;
+import org.metawidget.inspector.annotation.UiHidden;
+import org.metawidget.inspector.annotation.UiRequired;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.ZonedDateTime;
-import java.util.Date;
 import java.util.Set;
-
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="type",discriminatorType=DiscriminatorType.STRING)
+@Table(name="PERSON")
 @Entity
-public class Person implements Serializable {
+public abstract class Person {
     private static final long serialVersionUID = -3501514625217380338L;
     @Id
-    @SequenceGenerator(name = "contact_generator", sequenceName = "contact_sequence", initialValue = 100)
-    @GeneratedValue(generator = "contact_generator")
+    @SequenceGenerator(name = "Person_generator", sequenceName = "Person_sequence", initialValue = 100)
+    @GeneratedValue(generator = "Person_generator")
+    @UiHidden
     private Long id;
 
     @Column(name = "creation_date", insertable = false, updatable = false, columnDefinition = "timestamp default current_timestamp")
     @org.hibernate.annotations.Generated(value = GenerationTime.INSERT)
     private ZonedDateTime creationDate;
-    @Enumerated(EnumType.STRING)
-    private PersonType personType;
 
+    @UiRequired
     private String firstName;
+
+    @UiRequired
     private String lastName;
+    @Enumerated(EnumType.STRING)
     private Title title;
+
+    @UiRequired
     @Enumerated(EnumType.STRING)
     private Gender gender;
-    private Date dob;
 
+    @UiRequired
     @OneToOne(mappedBy = "person")
     private Address address;
 
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
-    private Set<Contact> contacts;
+    private Set<Communication> communications;
+
+    private String notes;
 
 
     public ZonedDateTime getCreationDate() {
@@ -50,14 +62,6 @@ public class Person implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public PersonType getPersonType() {
-        return personType;
-    }
-
-    public void setPersonType(PersonType personType) {
-        this.personType = personType;
     }
 
     public String getFirstName() {
@@ -92,20 +96,12 @@ public class Person implements Serializable {
         this.gender = gender;
     }
 
-    public Date getDob() {
-        return dob;
+    public Set<Communication> getCommunications() {
+        return communications;
     }
 
-    public void setDob(Date dob) {
-        this.dob = dob;
-    }
-
-    public Set<Contact> getContacts() {
-        return contacts;
-    }
-
-    public void setContacts(Set<Contact> contacts) {
-        this.contacts = contacts;
+    public void setCommunications(Set<Communication> communications) {
+        this.communications = communications;
     }
 
     public Address getAddress() {
@@ -115,4 +111,14 @@ public class Person implements Serializable {
     public void setAddress(Address address) {
         this.address = address;
     }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    abstract public PersonType getType();
 }

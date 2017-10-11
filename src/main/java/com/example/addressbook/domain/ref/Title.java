@@ -1,4 +1,4 @@
-package com.example.addressbook.domain;
+package com.example.addressbook.domain.ref;
 
 
 public enum Title {

@@ -1,8 +1,8 @@
 package com.example.addressbook.repository.dto;
 
 
-import com.example.addressbook.domain.Contact;
-import com.example.addressbook.domain.ContactType;
+import com.example.addressbook.domain.Communication;
+import com.example.addressbook.domain.ref.CommunicationType;
 
 public class ContactDTO {
     private Long id;
@@ -12,18 +12,18 @@ public class ContactDTO {
     public ContactDTO() {
     }
 
-    public ContactDTO(Contact contact) {
-        this.id = contact.getId();
-        this.value = contact.getValue();
-        this.type = contact.getType().name();
+    public ContactDTO(Communication communication) {
+        this.id = communication.getId();
+        this.value = communication.getValue();
+        this.type = communication.getCommunicationType().name();
     }
 
-    public Contact toEntity() {
-        Contact contact = new Contact();
-        contact.setId(this.getId());
-        contact.setValue(this.getValue());
-        contact.setType(ContactType.valueOf(this.getType()));
-        return contact;
+    public Communication toEntity() {
+        Communication communication = new Communication();
+        communication.setId(this.getId());
+        communication.setValue(this.getValue());
+        communication.setCommunicationType(CommunicationType.valueOf(this.getType()));
+        return communication;
     }
 
     public Long getId() {

@@ -2,6 +2,8 @@ package com.example.addressbook.repository.dto;
 
 
 import com.example.addressbook.domain.*;
+import com.example.addressbook.domain.ref.Gender;
+import com.example.addressbook.domain.ref.Title;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,32 +28,30 @@ public class PersonDTO implements Comparable<PersonDTO> {
     public PersonDTO(Person person) {
 
         this.address = new AddressDTO(person.getAddress());
-        this.dob = person.getDob();
         this.firstName = person.getFirstName();
         this.lastName = person.getLastName();
         this.gender = person.getGender().name();
         this.id = person.getId();
         this.title = person.getTitle().name();
-        if(person.getContacts() != null && person.getContacts().size() > 0)
-            for (Contact contact : person.getContacts()) {
-                this.contacts.add(new ContactDTO(contact));
+        if(person.getCommunications() != null && person.getCommunications().size() > 0)
+            for (Communication communication : person.getCommunications()) {
+                this.contacts.add(new ContactDTO(communication));
             }
     }
 
     public Person toEntity() {
-        Person person = new Person();
+        Person person = new BusinessContact();
         person.setAddress(this.getAddress().toEntity());
-        person.setDob(this.getDob());
         person.setFirstName(this.getFirstName());
         person.setLastName(this.getLastName());
         person.setGender(Gender.valueOf(this.getGender()));
         person.setId(this.getId());
         person.setTitle(Title.valueOf(this.getTitle()));
-        person.setContacts(new HashSet<>());
+        person.setCommunications(new HashSet<>());
         for (ContactDTO contactDTO :this.getContacts()) {
-            Contact contact = contactDTO.toEntity();
-            contact.setPerson(person);
-            person.getContacts().add(contact);
+            Communication communication = contactDTO.toEntity();
+            communication.setPerson(person);
+            person.getCommunications().add(communication);
         }
         return person;
     }

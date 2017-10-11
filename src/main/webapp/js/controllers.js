@@ -1,68 +1,28 @@
-// Metawidget Examples (licensed under BSD License)
-//
-// Copyright (c) Richard Kennard
-// All rights reserved
-//
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided that the following conditions
-// are met:
-//
-// * Redistributions of source code must retain the above copyright notice,
-//   this list of conditions and the following disclaimer.
-// * Redistributions in binary form must reproduce the above copyright notice,
-//   this list of conditions and the following disclaimer in the documentation
-//   and/or other materials provided with the distribution.
-// * Neither the name of Richard Kennard nor the names of its contributors may
-//   be used to endorse or promote products derived from this software without
-//   specific prior written permission.
-//
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-// FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-// (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS
-// OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
-// OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
-// OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
-// OF THE POSSIBILITY OF SUCH DAMAGE.
-
 ( function() {
 
 	'use strict';
 
-	/* Controllers */
-
 	angular.module( 'controllers', [] ).controller( 'addressBookController', function( $scope, $location, contacts, metawidgetConfig ) {
-
-		// Load all contacts
-
 		contacts.then( function( result ) {
-
 			$scope.contacts = result.data;
 		} );
 
-		// Prepare search boxes
-
 		$scope.metawidgetConfig = metawidgetConfig;
+
 		$scope.search = {
-			firstname: '',
-			surname: '',
+			firstName: '',
+			lastName: '',
 			type: ''
 		};
 
 		$scope.searchActions = {
-
-			// Copy search criteria into Angular filter
-
 			search: function() {
-
 				$scope.filter = {};
-				if ( $scope.search.firstname !== '' ) {
-					$scope.filter.firstname = $scope.search.firstname;
+				if ( $scope.search.firstName !== '' ) {
+					$scope.filter.firstName = $scope.search.firstName;
 				}
-				if ( $scope.search.surname !== '' ) {
-					$scope.filter.surname = $scope.search.surname;
+				if ( $scope.search.lastName !== '' ) {
+					$scope.filter.lastName = $scope.search.lastName;
 				}
 				if ( $scope.search.type !== '' ) {
 					$scope.filter.type = $scope.search.type;
@@ -84,7 +44,6 @@
 	.controller( 'contactController', function( $scope, $routeParams, $location, contacts, metawidgetConfig ) {
 
 		// Constructor
-
 		switch ( $routeParams.contactId ) {
 			case 'personal':
 			case 'business':
@@ -110,7 +69,7 @@
 							// Return a copy of the entry, in case the user hits
 							// cancel
 							$scope.current = angular.fromJson( angular.toJson( result.data[loop] ) );
-							$scope.dialogTitle = $scope.current.title + ' ' + $scope.current.firstname + ' ' + $scope.current.surname + ' - ';
+							$scope.dialogTitle = $scope.current.title + ' ' + $scope.current.firstName + ' ' + $scope.current.lastName + ' - ';
 
 							if ( $scope.current.type === 'personal' ) {
 								$scope.dialogTitle += 'Personal Contact';

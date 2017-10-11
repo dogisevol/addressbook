@@ -8,10 +8,9 @@
 
 		<div id="dialog-content">
 
-			<img id="dialog-image" ng-src="media/{{current.type}}.gif" alt=""/>
 
 			<metawidget ng-model="current" read-only="readOnly" config="metawidgetConfig.form">
-				<table id="currentCommunications" class="data-table">
+				<table id="currentcontacts" class="data-table">
 					<thead>
 						<tr>
 							<th class="column-half">Type</th>
@@ -23,14 +22,14 @@
 						<tr>
 							<td class="column-half"><metawidget ng-model="communication.type" config="metawidgetConfig.simple"></metawidget></td>
 							<td class="column-half"><metawidget ng-model="communication.value" config="metawidgetConfig.simple"></metawidget></td>
-							<td class="column-tiny, table-buttons"><button ng-click="addCommunication()">Add</button></td>
+							<td class="column-tiny, table-buttons"><button ng-click="addcontact()">Add</button></td>
 						</tr>
 					</tfoot>
 					<tbody>
 						<tr ng-repeat="communication in current.communications">
 							<td class="column-half">{{communication.type}}</td>
 							<td class="column-half">{{communication.value}}</td>
-							<td class="column-tiny, table-buttons" ng-show="!readOnly"><button ng-click="removeCommunication($index)">Delete</button></td>
+							<td class="column-tiny, table-buttons" ng-show="!readOnly"><button ng-click="removecontact($index)">Delete</button></td>
 						</tr>
 					</tbody>
 				</table>

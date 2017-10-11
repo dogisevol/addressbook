@@ -1,6 +1,7 @@
 package com.example.addressbook.domain;
 
 import org.hibernate.annotations.Cascade;
+import org.metawidget.inspector.annotation.UiRequired;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,15 +16,19 @@ public class Address implements Serializable {
     @GeneratedValue(generator = "address_generator")
     private Long id;
 
+    @UiRequired
     @Column(nullable = false)
     private String street;
 
+    @UiRequired
     @Column(nullable = false)
     private String city;
 
+    @UiRequired
     @Column(nullable = false)
     private String state;
 
+    @UiRequired
     @Column(nullable = false)
     private String postcode;
 

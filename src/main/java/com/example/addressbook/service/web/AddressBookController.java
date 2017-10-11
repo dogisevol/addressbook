@@ -9,14 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-
 @Controller
 public class AddressBookController {
     @Autowired
     private AddressBookService addressBookService;
 
-    @RequestMapping(value = "/person", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/contact", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @Transactional(readOnly = true)
     public Iterable<PersonDTO> getAll() {
@@ -25,14 +23,32 @@ public class AddressBookController {
 
     @RequestMapping(value = "/schema/personal", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Map<Object, Object> getPersonalSchema() {
-        return addressBookService.getPersonalSchema();
+    public String getPersonalSchema() {
+        return addressBookService.getPersonSchema();
     }
 
     @RequestMapping(value = "/schema/business", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Map<Object, Object> getBusinessSchema() {
+    public String  getBusinessSchema() {
         return addressBookService.getBusinessSchema();
+    }
+
+    @RequestMapping(value = "/schema/address", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String getAddressSchema() {
+        return addressBookService.getAddressSchema();
+    }
+
+    @RequestMapping(value = "/schema/contactType", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String getPersonTypeSchema() {
+        return addressBookService.getPersonTypeSchema();
+    }
+
+    @RequestMapping(value = "/schema/communicationType", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String getContactTypeSchema() {
+        return addressBookService.getCommunicationTypeSchema();
     }
 
 
