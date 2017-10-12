@@ -11,7 +11,7 @@ Addressbook is a simple application to maintain an address book
 ## Start server
 	java -jar target/addressbook-0.0.1-SNAPSHOT.jar
 	or
-	mvn spring-boot:start
+	mvn spring-boot:run
 	
 ## Other
 	H2 console is available on http://localhost:8080/h2-console/	
