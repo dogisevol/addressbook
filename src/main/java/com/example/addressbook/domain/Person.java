@@ -44,7 +44,7 @@ public abstract class Person {
     private Gender gender;
 
     @UiHidden
-    @OneToOne(mappedBy = "person")
+    @OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
     private Address address;
 
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)

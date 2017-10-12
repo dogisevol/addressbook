@@ -77,11 +77,11 @@ public class AddressBookController {
         return ResponseEntity.created(uriComponents.toUri()).body(result);
     }
 
-    @RequestMapping(value = "/contact", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/contact/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @Transactional
-    public ResponseEntity<PersonDTO> delete(@RequestBody PersonDTO body) {
-        addressBookService.delete(body.toEntity());
+    public ResponseEntity<PersonDTO> delete(@PathVariable Long id) {
+        addressBookService.delete(id);
             return ResponseEntity.ok().build();
     }
 }

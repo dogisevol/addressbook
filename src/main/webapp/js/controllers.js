@@ -60,8 +60,10 @@
 				$scope.current.type = $routeParams.contactId;
 				if ( $scope.current.type === 'personal' ) {
 					$scope.dialogTitle = 'Personal Contact';
+					$scope.dob= "";
 				} else {
 					$scope.dialogTitle = 'Business Contact';
+                    $scope.company= "";
 				}
 				break;
 
@@ -140,9 +142,12 @@
 							}
 						}
 					}
-                    $http.post("/contact", $scope.current)
-                    //todo success error callbacks
-					$location.path( '' );
+                    $http.post("/contact", $scope.current).then( function( result ) {
+                        $scope.current.id = result.data.id
+                        $scope.current.address.id = result.data.address.id
+                        $location.path( '' );
+                    });
+
 				} );
 			},
 
@@ -154,7 +159,7 @@
 						if ( result.data[loop].id === $scope.current.id ) {
 							result.data.splice( loop, 1 );
 							//todo do splice only on http success
-							$http.delete('/contact', $scope.current)
+							$http.delete('/contact/'+$scope.current.id)
 							break;
 						}
 					}

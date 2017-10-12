@@ -12,12 +12,14 @@ import java.util.Date;
 import java.util.HashSet;
 
 public class PersonDTO implements Comparable<PersonDTO> {
+    private String company;
     private AddressDTO address;
     private Long id;
     private String title;
     private String firstName;
     private String lastName;
     private Date dob;
+    private Date creationDate;
     private String gender;
     private String type;
     private Collection<ContactDTO> communications = new ArrayList<>();
@@ -42,7 +44,7 @@ public class PersonDTO implements Comparable<PersonDTO> {
         if(person instanceof PersonalContact){
             this.dob = ((PersonalContact)person).getDob();
         }else{
-
+            this.company = ((BusinessContact)person).getCompany();
         }
     }
 
@@ -152,6 +154,22 @@ public class PersonDTO implements Comparable<PersonDTO> {
 
     public void setAddress(AddressDTO address) {
         this.address = address;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 }
 

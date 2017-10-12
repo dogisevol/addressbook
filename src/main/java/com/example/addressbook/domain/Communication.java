@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class Communication implements Serializable {
 
     @Id
-    @SequenceGenerator(name = "Communication_generator", sequenceName = "Communication_generator")
+    @SequenceGenerator(name = "Communication_generator", sequenceName = "Communication_generator", initialValue = 100)
     @GeneratedValue(generator = "Communication_generator")
     private Long id;
 

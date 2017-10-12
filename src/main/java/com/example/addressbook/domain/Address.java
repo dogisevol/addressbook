@@ -14,7 +14,7 @@ public class Address implements Serializable {
 
     private static final long serialVersionUID = 1292824767348769583L;
     @Id
-    @SequenceGenerator(name = "address_generator", sequenceName = "address_generator")
+    @SequenceGenerator(name = "address_generator", sequenceName = "address_generator", initialValue = 100)
     @GeneratedValue(generator = "address_generator")
     @UiHidden
     private Long id;

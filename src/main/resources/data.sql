@@ -1,4 +1,4 @@
-insert into Person (id, type, title, first_name, last_name, gender) values(1, 'B', 'Mr', 'Edward', 'Hyde', 'Male')
+insert into Person (id, type, title, first_name, last_name, gender, company) values(1, 'B', 'Mr', 'Edward', 'Hyde', 'Male', 'Corporation of evil')
 insert into Person (id, type, title, first_name, last_name, gender, dob) values(2, 'P', 'Dr', 'Henry', 'Jekyll', 'Male', CURRENT_DATE())
 insert into Address(id, person_id, street, city, state, postcode) values (1, 1, '6 Dark street', 'Evilburg', 'Evilstate', 6666)
 insert into Address(id, person_id, street, city, state, postcode) values (2, 2, '9 Bright street', 'Goodville', 'Goodstate', 9999)

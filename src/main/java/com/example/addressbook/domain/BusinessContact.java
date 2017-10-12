@@ -17,8 +17,18 @@ import java.util.Set;
 @DiscriminatorValue("B")
 public class BusinessContact extends Person{
 
+    private String company;
+
     @Override
     public PersonType getType() {
         return PersonType.Business;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 }

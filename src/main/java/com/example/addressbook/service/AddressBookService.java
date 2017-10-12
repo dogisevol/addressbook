@@ -20,7 +20,7 @@ public interface AddressBookService {
 
     void setPersonSchema(String json);
 
-    void delete(Person person);
+    void delete(Long person);
 
     String getPersonSchema();
 

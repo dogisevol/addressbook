@@ -9,6 +9,7 @@ import com.example.addressbook.service.AddressBookService;
 import org.metawidget.inspectionresultprocessor.iface.DomInspectionResultProcessor;
 import org.metawidget.inspectionresultprocessor.json.JsonTypeMappingProcessor;
 import org.metawidget.inspectionresultprocessor.json.JsonTypeMappingProcessorConfig;
+import org.metawidget.inspectionresultprocessor.sort.ComesAfterInspectionResultProcessor;
 import org.metawidget.inspectionresultprocessor.type.TypeMappingInspectionResultProcessor;
 import org.metawidget.inspector.annotation.MetawidgetAnnotationInspector;
 import org.metawidget.inspector.composite.CompositeInspector;
@@ -41,9 +42,9 @@ public class AddessBookApp {
             ));
 
             DomInspectionResultProcessor[] processors = new DomInspectionResultProcessor[]{
-                    new JsonTypeMappingProcessor(),
                     new TypeMappingInspectionResultProcessor(new JsonTypeMappingProcessorConfig()),
-                    new JsonSchemaWithHiddenProcessor()
+                    new JsonSchemaWithHiddenProcessor(),
+                    new ComesAfterInspectionResultProcessor(),
             };
 
             addressBookService.setPersonSchema(getJson(PersonalContact.class.getName(), mInspector, processors));
@@ -54,7 +55,7 @@ public class AddessBookApp {
         };
     }
 
-    private String getJson(String className, CompositeInspector mInspector, DomInspectionResultProcessor[] mInspectionResultProcessors) {
+    private static String getJson(String className, CompositeInspector mInspector, DomInspectionResultProcessor[] mInspectionResultProcessors) {
         Element inspectionResult = mInspector.inspectAsDom(null, className);
         for (DomInspectionResultProcessor<Element, Object> inspectionResultProcessor : mInspectionResultProcessors) {
             inspectionResult = inspectionResultProcessor.processInspectionResultAsDom(
