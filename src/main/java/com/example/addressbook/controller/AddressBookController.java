@@ -59,18 +59,7 @@ public class AddressBookController {
     @RequestMapping(value = "/contact", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @Transactional
-    public ResponseEntity<PersonDTO> create(@RequestBody PersonDTO body, UriComponentsBuilder b) {
-        PersonDTO result = new PersonDTO(addressBookService.save(body.toEntity()));
-        UriComponents uriComponents =
-                b.path("/contact/{id}").buildAndExpand(result.getId());
-        return ResponseEntity.created(uriComponents.toUri()).body(result);
-    }
-
-
-    @RequestMapping(value = "/contact", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    @Transactional
-    public ResponseEntity<PersonDTO> update(@RequestBody PersonDTO body, UriComponentsBuilder b) {
+    public ResponseEntity<PersonDTO> save(@RequestBody PersonDTO body, UriComponentsBuilder b) {
         PersonDTO result = new PersonDTO(addressBookService.save(body.toEntity()));
         UriComponents uriComponents =
                 b.path("/contact/{id}").buildAndExpand(result.getId());
